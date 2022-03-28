@@ -4,6 +4,7 @@ import time
 import calendar
 from datetime import date, datetime, timedelta
 from basic import fibonacci_demo
+import sys
 
 
 def numberTest():
@@ -225,7 +226,9 @@ def exceptionTest():
         fh = open("D://test//test.txt", "w")
         fh.write("This is a test file")
     except IOError as e:
-        print("!! Error, file not found")
+        raise e
+        # print("!! Error, file not found")
+
     else:
         print("File write with success..")
     finally:
@@ -237,25 +240,111 @@ def exceptionTest():
 def dummyMethod():
     pass
 
+def variableTest(num):
+    print("-" * 50)
+    print("%d 在函数内的内存地址是 %x" % (num, id(num)))
+    result = 10
+    print("%d 在函数内的内存地址是 %x" % (result, id(result)))
+    print("-" * 50)
+    return result
 
+def yieldTest():
+    print("Starting...")
+    while True:
+        result = yield 4
+        print(f"Result: {result}")
 
-
+def iterTest():
+    list = [1,2,3,4,5]
+    it = iter(list)
+    for i in it:
+        print(i)
+    it2 = iter(list)
+    while True:
+        try:
+            print(next(it2))
+        except StopIteration:
+            sys.exit()
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    # numberTest()
-    # stringTest()
+    #numberTest()
+    #stringTest()
     # dateTest()
     # listTest()
     # tupleTest()
     # setTest()
     # dictionaryTest()
     # flowControl()
-    #exceptionTest()
-    fibonacci_demo.fibonacciDemo1(3)
+    # try:
+    #     exceptionTest()
+    # except IOError as e:
+    #     print("!! Exception !!")
 
+    #fibonacci_demo.fibonacciDemo1(3)
+    # for i in
+    # range(20):
+    #     print(fibonacci_demo.fibonacciDemo2(i))
 
+    # for i in range(10):
+    #     print(fibonacci_demo.fibonacciDemo4(i))
+
+    ## Variable
+    ## test a, b = b, a+b
+    ##  对于python而言，python的一切变量都是对象，变量的存储，采用了引用语义的方式，存储的只是一个变量的值所在的内存地址，而不是这个变量的只本身
+    # a, b = 0, 1
+    # print(id(a))
+    # print(id(b))
+    # for i in range(3):
+    #     a, b = b, a+b
+    #     print(a)
+    #     print(b)
+    # a = 20
+    # print("%d 调用函数前内存值为 %x" % (a, id(a)))
+    # r = variableTest(a)
+    # print("调用函数后 实参内存地址是 %x" % id(a))
+    # print("调用函数后 返回值内存地址是 %x" % id(r))
+    # a = 1
+    # print("调用函数前内存值为 %x" % (id(a)))
+    # a = "hello"
+    # print("调用函数前内存值为 %x" % (id(a)))
+    # a = [1, 2, 3]
+    # print("调用函数前内存值为 %x" % (id(a)))
+    # a = [3, 2, 1]
+    # print("调用函数前内存值为 %x" % (id(a)))
+    #
+    # demo_list = [1, 2, 3]
+    #
+    # print("定义列表后的内存地址 %d" % id(demo_list))
+    #
+    # demo_list.append(999)
+    # demo_list.pop(0)
+    # demo_list.remove(2)
+    # demo_list[0] = 10
+    #
+    # print("修改数据后的内存地址 %d" % id(demo_list))
+    #
+    # demo_dict = {"name": "小明"}
+    #
+    # print("定义字典后的内存地址 %d" % id(demo_dict))
+    #
+    # demo_dict["age"] = 18
+    # demo_dict.pop("name")
+    # demo_dict["name"] = "老王"
+    #
+    # print("修改数据后的内存地址 %d" % id(demo_dict))
+
+    ######### yield test #########
+    # result = yieldTest() # yieldTest 方法不会被执行，只是返回一个生成器 对象
+    # print(f"yield return: {result}")
+    # print(next(result))
+    # print("*" * 20)
+    # print(next(result))
+    # print(result.send(7))
+
+    ## Test python iter
+    iterTest()
 
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

@@ -22,4 +22,40 @@ def fibonacciDemo1(n):
             count += 1
 
 def fibonacciDemo2(n):
-    assert n>=0
+    assert n >= 0, "n must positive"
+    if n <= 1:
+        return n
+    else:
+        return fibonacciDemo2(n-1) + fibonacciDemo2(n-2)
+
+def fibonacciDemo3(n):
+    a, b = 0, 1
+    for _ in range(n):
+        a, b = b, a + b #先计算 b = a+b, 后赋值给 a （ a = b)
+    return a
+
+## 递推法
+# take n = 4 for example, 0, 1, 1, 2, 3
+# a = 0, b = 1, a+b =1, b + a+b = 2, a=b +b +a+b  =3
+def fibonacciDemo4(n):
+    assert n>=0, "n must be positive integer!"
+    if n ==0:
+        return n
+    else:
+        a, b = 0, 1
+        counter = 0
+        while counter < n:
+            temp = a + b
+            b = a
+            a = temp
+            counter += 1
+        return a
+def fibonacciDemo5(n):
+    assert n>=0, "n must be positive integer!"
+    a, b = 0, 1
+    while n >=0:
+        a, b = b, a+b
+        n -= 1
+    yield a
+
+
