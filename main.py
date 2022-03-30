@@ -6,6 +6,9 @@ from datetime import date, datetime, timedelta
 from basic import fibonacci_demo
 import sys
 
+from basic.file_utils.file_utils import dir_travel, append_write2file
+from basic.thread_test.threadTest import MyThread
+
 
 def numberTest():
     ########### integer type
@@ -344,7 +347,34 @@ if __name__ == '__main__':
     # print(result.send(7))
 
     ## Test python iter
-    iterTest()
+    ##iterTest()
+
+    ### Thread testing
+    # threads = []
+    # myThread1 = MyThread(1, "MyThread-1", 1)
+    # myThread2 = MyThread(2, "MyThread-2", 2)
+    # myThread3 = MyThread(3, "MyThread-3", 3)
+    #
+    # threads.append(myThread1)
+    # threads.append(myThread2)
+    # threads.append(myThread3)
+    #
+    # myThread1.start()
+    # myThread2.start()
+    # myThread3.start()
+    #
+    # # for t in threads:
+    # #     t.join()
+    #
+    # print("############ exit main thread ###############")
+    #print(dir_travel("F:\\temp\\python_test"))
+    append_write2file("F:\\temp\\python_test\\csv", "test_f_w.txt", "Hello 123456")
+
+
+
+
+
+
 
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
