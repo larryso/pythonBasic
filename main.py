@@ -293,9 +293,9 @@ if __name__ == '__main__':
     # for i in range(10):
     #     print(fibonacci_demo.fibonacciDemo4(i))
 
-    ## Variable
-    ## test a, b = b, a+b
-    ##  对于python而言，python的一切变量都是对象，变量的存储，采用了引用语义的方式，存储的只是一个变量的值所在的内存地址，而不是这个变量的只本身
+    # 1 Variable
+    # test a, b = b, a+b
+    #  对于python而言，python的一切变量都是对象，变量的存储，采用了引用语义的方式，存储的只是一个变量的值所在的内存地址，而不是这个变量的只本身
     # a, b = 0, 1
     # print(id(a))
     # print(id(b))
@@ -338,13 +338,13 @@ if __name__ == '__main__':
     #
     # print("修改数据后的内存地址 %d" % id(demo_dict))
 
-    ######### yield test #########
-    # result = yieldTest() # yieldTest 方法不会被执行，只是返回一个生成器 对象
-    # print(f"yield return: {result}")
-    # print(next(result))
-    # print("*" * 20)
-    # print(next(result))
-    # print(result.send(7))
+    ######## yield test #########
+    result = yieldTest() # yieldTest 方法不会被执行，只是返回一个生成器 对象
+    print(f"yield return: {result}")
+    print(next(result))
+    print("*" * 20)
+    print(next(result))
+    print(result.send(7))
 
     ## Test python iter
     ##iterTest()
@@ -368,7 +368,7 @@ if __name__ == '__main__':
     #
     # print("############ exit main thread ###############")
     #print(dir_travel("F:\\temp\\python_test"))
-    append_write2file("F:\\temp\\python_test\\csv", "test_f_w.txt", "Hello 123456")
+    #append_write2file("F:\\temp\\python_test\\csv", "test_f_w.txt", "Hello 123456")
 
 
 
