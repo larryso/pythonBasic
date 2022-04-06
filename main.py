@@ -14,6 +14,7 @@ from basic.csv_process.pandas_parsing_and_write import csv_pandas_read_write
 import glob
 from basic.excel_process.base_excel_read_write import excel_read_write
 from basic.excel_process.pandas_excel_read_write import pandas_excel_read_write
+from basic.excel_process.pandas_excel_data_processor import pandas_excel_data_processing
 
 
 def numberTest():
@@ -398,6 +399,7 @@ if __name__ == '__main__':
     ##csv_pandas_read_write("F:\\temp\\python_test\\csv\\csv_sample.csv",  "F:\\temp\\python_test\\csv\\csv_sample3.csv")
     #excel_read_write("F:\\temp\\python_test\\excel\\test.xlsx", "F:\\temp\\python_test\\excel\\test_out.xlsx")
     #pandas_excel_read_write("F:\\temp\\python_test\\excel\\test.xlsx", "F:\\temp\\python_test\\excel\\test_out_pandas.xlsx")
+    pandas_excel_data_processing("F:\\temp\\python_test\\excel\\test.xlsx", "F:\\temp\\python_test\\excel\\test_out_pandas.xlsx")
 
 
 
