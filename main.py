@@ -3,11 +3,17 @@ from math import exp, log, sqrt
 import time
 import calendar
 from datetime import date, datetime, timedelta
-from basic import fibonacci_demo
+from basic import fibonacci_demo, file_utils
 import sys
 
 from basic.file_utils.file_utils import dir_travel, append_write2file
 from basic.thread_test.threadTest import MyThread
+from basic.csv_process.csv_read_with_simple_parsing_and_write import csv_simple_read_write
+from basic.csv_process.pandas_parsing_and_write import csv_pandas_read_write
+
+import glob
+from basic.excel_process.base_excel_read_write import excel_read_write
+from basic.excel_process.pandas_excel_read_write import pandas_excel_read_write
 
 
 def numberTest():
@@ -269,6 +275,20 @@ def iterTest():
         except StopIteration:
             sys.exit()
 
+def glob_test(dir_path):
+    f = glob.glob(dir_path)
+    print(f)
+
+    for file in f:
+        print(file)
+
+def iglob_test(dir_path):
+    f = glob.iglob(dir_path)
+    print(f)
+
+    for file in f:
+        print(file)
+
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
@@ -339,12 +359,12 @@ if __name__ == '__main__':
     # print("修改数据后的内存地址 %d" % id(demo_dict))
 
     ######## yield test #########
-    result = yieldTest() # yieldTest 方法不会被执行，只是返回一个生成器 对象
-    print(f"yield return: {result}")
-    print(next(result))
-    print("*" * 20)
-    print(next(result))
-    print(result.send(7))
+    # result = yieldTest() # yieldTest 方法不会被执行，只是返回一个生成器 对象
+    # print(f"yield return: {result}")
+    # print(next(result))
+    # print("*" * 20)
+    # print(next(result))
+    # print(result.send(7))
 
     ## Test python iter
     ##iterTest()
@@ -369,6 +389,18 @@ if __name__ == '__main__':
     # print("############ exit main thread ###############")
     #print(dir_travel("F:\\temp\\python_test"))
     #append_write2file("F:\\temp\\python_test\\csv", "test_f_w.txt", "Hello 123456")
+
+    # glob_test(r"c:\*")
+    # iglob_test(r"c:\*")
+
+    ##file_utils.file_utils.read_multiple_txt("C:\\tmp\\logs")
+    #csv_simple_read_write("F:\\temp\\python_test\\csv\\csv_sample.csv", "F:\\temp\\python_test\\csv\\csv_sample2.csv")
+    ##csv_pandas_read_write("F:\\temp\\python_test\\csv\\csv_sample.csv",  "F:\\temp\\python_test\\csv\\csv_sample3.csv")
+    #excel_read_write("F:\\temp\\python_test\\excel\\test.xlsx", "F:\\temp\\python_test\\excel\\test_out.xlsx")
+    #pandas_excel_read_write("F:\\temp\\python_test\\excel\\test.xlsx", "F:\\temp\\python_test\\excel\\test_out_pandas.xlsx")
+
+
+
 
 
 

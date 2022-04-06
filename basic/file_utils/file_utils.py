@@ -1,4 +1,5 @@
 import os
+import glob
 
 
 def dir_travel(file_path):
@@ -21,9 +22,18 @@ def dir_travel(file_path):
         print("File path not exists!!")
         return False
 
+
 def append_write2file(file_path, file_name, message):
     if not os.path.exists(file_path):
         os.makedirs(file_path)
     # file = open(os.path.join(file_path,file_name), "a")
     with open(os.path.join(file_path, file_name), "a") as file:
         file.write(message)
+
+
+def read_multiple_txt(file_path):
+    print(file_path)
+    for input_file in glob.glob(os.path.join(file_path, '*.txt')):
+        with open(input_file, 'r', encoding='utf-8', newline='') as file_reader:
+            for row in file_reader:
+                print(row)
