@@ -1,5 +1,6 @@
 import pandas as pd
 import openpyxl
+import numpy as np
 
 
 def pandas_excel_data_processing(input_file, output_file):
@@ -47,7 +48,7 @@ def pandas_excel_data_processing(input_file, output_file):
     print(data_frame.loc[data_frame['Customer Name'] == 'Tony', ['Customer Name', 'Purchase Date']])
     ## 选择 “产品名称”列 的值中是以 "【拍卖交易】" 开头的行的所有列
 
-    if True:
+    if False:
         input_file = input_file.replace("test.xlsx", "数据爬取-金币涨跌追踪.xlsx")
         excel_date = pd.read_excel(input_file)
         print(excel_date)
@@ -57,3 +58,81 @@ def pandas_excel_data_processing(input_file, output_file):
         print(excel_date.loc[excel_date['产品名称'].str.startswith('【拍卖交易2】') & excel_date['收购比例'] == 69.01])
         ## 利用apply的lambda函数判断符合条件的行，如下选择 时间 列中20点的所有数据
         print(excel_date.loc[excel_date['日期'].apply(lambda x: x.split(' ')[1].split(':')[0] == '20')])
+
+        ## 写 Excel 文件
+        ## 筛选
+        idx = excel_date['日期'].apply(lambda x: x.split(" ")[1].split(':')[0] == '20')
+
+        output_data = excel_date.loc[idx, ['产品名称', '收购比例']]
+        print(output_data)
+        output_data.to_excel(output_file, index=False)
+
+        ## 写多个sheet
+        sheet_dict = {}
+        data1 = excel_date.loc[idx, ['日期','产品名称']]
+        sheet_dict['data1'] = data1
+
+        data2 = excel_date.loc[idx, ['产品名称', '收购比例']]
+        sheet_dict['data2'] = data2
+        writer = pd.ExcelWriter(output_file)
+        for sheet_name, sheet_data in sheet_dict.items():
+            sheet_data.to_excel(writer, sheet_name, index=False)
+        writer.save()
+
+def data_frame_test(input_file):
+    ## create empty dataFrame
+    data_frame = pd.DataFrame(columns={'c1', 'c2', 'c3'}, index=[0])
+    print(data_frame)
+    ## data_frame.describe()
+    data_frame = pd.read_excel(input_file)
+    print(data_frame.describe())
+    print(data_frame.head())
+    print(data_frame.tail())
+    print(data_frame)
+    ## 单独计算某列的统计值
+    print(data_frame['收购金额RMB'].sum())
+    #mean–>平均数
+    print(data_frame['收购金额RMB'].mean())
+    print(data_frame['收购金额RMB'].count())
+    print(data_frame['收购金额RMB'].max())
+    ## 查看dataframe的数据数目：
+    print(data_frame.size)
+    ## 返回列数：
+    print(data_frame.ndim)
+    print(data_frame.axes)
+    ## 缺失值可以删除也可以用均值或者0等数填充：
+    print(data_frame.fillna(0))
+    print(data_frame.dropna())
+    ## 去除有NaN值的行或列(axis=0去除行，=1去除列)：
+    print(data_frame.dropna(axis=0))
+    print(data_frame.dropna(axis=1))
+
+    ## test merge
+    df1 = pd.DataFrame({'key': ['one', 'two', 'two'],
+                        'data1': np.arange(3)})
+    df2 = pd.DataFrame({'key': ['one', 'three', 'three'],
+                        'data2': np.arange(3)})
+    ## 默认：以重叠的列名当作连接键, 默认how 为 innner （交集）
+    df3 = pd.merge(df1,df2)
+    df4 = pd.merge(df1, df2, how='left')
+    df5 = pd.merge(df1,df2, how='right')
+    df6 = pd.merge(df1, df2, how='outer')
+    print(df1)
+    print(df2)
+    print(df3)
+    print(df4)
+    print(df5)
+    print(df6)
+    ## 多键连接时将连接键做成列表传入。on默认是两者同时存在的列
+    df7 = pd.DataFrame({'key': ['one', 'two', 'two'],
+                        'value': ['a','b','c'],
+                        'data1': np.arange(3)})
+    df8 = pd.DataFrame({'key': ['one', 'three', 'three'],
+                        'value': ['a', 'b', 'c'],
+                        'data2': np.arange(3)})
+    df9 = pd.merge(df7,df8, on=['key', 'value'], how='left')
+    print(df9)
+    df10 = pd.merge(df7, df8, left_on=['key', 'data1'], right_on=['key', 'data2'], how='left', indicator=True)
+    print(df10)
+
+
