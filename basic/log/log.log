@@ -1,0 +1,12 @@
+2022-10-25 23:17:42,241 - DEBUG - Debug Level
+2022-10-25 23:17:42,241 - INFO - Info Level
+2022-10-25 23:17:42,241 - WARNING - Warning level
+2022-10-25 23:17:42,241 - ERROR - Error Level
+2022-10-25 23:17:42,241 - CRITICAL - Critial Level
+2022-10-25 23:17:42,241 - ERROR - ZeroDivisionError
+Traceback (most recent call last):
+  File "C:\Larry\study\python\workspace\pythonBasic\basic\log\logger.py", line 19, in <module>
+    1/0
+ZeroDivisionError: division by zero
+2022-10-25 23:17:42,242 - INFO - test the customer logger
+2022-10-25 23:17:42,242 - WARNING - Filter logging Warning
